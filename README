@@ -1,0 +1,81 @@
+NAME
+    dynsudp - An udp update server for dyns.cx
+
+DESCRIPTION
+    This server accepts UDP messages containing an update information block
+    and rewrites this to a postscript011.php request.
+
+    I got this idea from Paul Lamote, he is also experimenting with
+    siteplayer (http://www.siteplayer.com) - an embedded webserver in 1
+    square inch - and he wanted to be able to update the dynamic forwarder
+    from his SP (siteplayer) device.
+
+    The reason why does not want to use a PC as the updater is because he
+    does not want to use his PC for this task; keeping a PC running costs
+    money and not everybody can have a DSL router and a PC running all the
+    time! Also, if you cannot have a PC running and you need to install an
+    updater on the DSL router, then you'll face a problem as not all DSL
+    routers can be expanded with custom software.
+
+    To use this, you'll need to run this daemon on a machine that is
+    reachable from your siteplayer device and that can reach the dync.cx
+    website.
+
+    We've run this for some time on dyns.cx, but stopped the support because
+    we did not want to stress the server to hard with all those siteplayer
+    devices out there ;-)
+
+INSTALL
+    Extract the archive in a directory, e.g. /usr/local/dynsudp. Edit the
+    config file to fit your needs. You'll probably need to set the paths.
+    Edit the startup script to reflect your paths.
+
+    If you have a proxy to access the internet, then set the ENV variable
+    http_proxy to reflect this.
+
+    Use the startup script to start, stop, restart the server and check the
+    status.
+
+PREREQUISITES
+    We need the following modules:
+
+            Net::Server
+            Dyns::Client
+
+USAGE SHORT
+    Send the following string to IP address 'ip' and port 20205:
+
+            username|password|hostname|domain|ip
+
+            e.g.
+
+            john|doe|johndoessite|dyns.cx|ip
+
+    Port 20205 is default in the dynsudp configuration.
+
+USAGE
+    Basically you'll need to send the following information to the dyns udp
+    service:
+
+      username|password|hostname|domain|ip
+
+    Imagine you're user 'username' on dyns.cx and you've the password
+    'password'. If you have reserved the domain name 'hostname' on dyns.cx,
+    you can update your dynamic dns entry as follow:
+
+      username|password|hostname|dyns.cx|
+
+    We've omitted the IP number, this way we take the IP number of the
+    gateway.
+
+    You direct a microcontroller to send this string via UDP to the dynsudp
+    service running on IP address 'ip' and port 20205. Or you can test this
+    via a HTML page with a form. look in the SP examples, comes with the SP
+    SDK, on how to do a UDP send.
+
+AUTHOR
+    Johan Van den Brande <johan@vandenbrande.com>
+
+LICENSE
+    This is free software, distributed underthe same terms as Perl itself.
+

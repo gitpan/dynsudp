@@ -1,0 +1,8 @@
+MANIFEST
+Makefile.PL
+README
+bin/client
+bin/dynsudp
+etc/dynsudp.conf
+startup/dynsudp
+test.pl

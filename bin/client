@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+use IO::Socket;
+
+my $socket = IO::Socket::INET->new( Proto => 'udp' );
+
+my $ip = inet_aton('127.0.0.1');
+my $portaddr = sockaddr_in(20205, $ip);
+
+send($socket, "test", 0, $portaddr);
